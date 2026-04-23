@@ -1,0 +1,20 @@
+memory_layers:
+  base_memory:
+    path: 01_Base_Memory
+    write_policy: explicit_field_required
+  project_memory:
+    path: 02_Project_Memory
+    write_policy: project_name_required
+  short_term_memory:
+    path: 03_Short_Term_Memory
+    write_policy: default_when_unclear
+
+context_builder:
+  path: 04_Context_Builder/generated_contexts
+  git_tracking: ignored
+
+governance:
+  privacy_first: true
+  real_memory_git_policy: ignored
+  require_sensitive_scan_before_push: true
+  conflict_policy: do_not_overwrite_record_conflict

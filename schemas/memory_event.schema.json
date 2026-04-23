@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "event_id",
+    "created_at",
+    "memory_type",
+    "content"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "memory_type": {
+      "type": "string",
+      "enum": [
+        "base_memory",
+        "project_memory",
+        "short_term_memory"
+      ]
+    },
+    "project_name": {
+      "type": "string"
+    },
+    "field": {
+      "type": "string"
+    },
+    "module": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "importance": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "confidence": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "content": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "privacy_level": {
+      "type": "string",
+      "enum": [
+        "public_example",
+        "local_private",
+        "sensitive"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

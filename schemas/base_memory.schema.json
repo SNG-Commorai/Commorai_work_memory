@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "memory_type",
+    "field",
+    "content"
+  ],
+  "properties": {
+    "memory_type": {
+      "const": "base_memory"
+    },
+    "field": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "importance": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "confidence": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "privacy_level": {
+      "type": "string",
+      "enum": [
+        "public_example",
+        "local_private",
+        "sensitive"
+      ]
+    },
+    "content": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

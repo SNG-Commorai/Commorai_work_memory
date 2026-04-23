@@ -1,0 +1,7 @@
+project_id: P_YYYYMMDD_project-slug
+project_name: "{{project_name}}"
+project_slug: project-slug
+project_stage: "{{project_stage}}"
+status: active
+created_at: "{{created_at}}"
+updated_at: "{{updated_at}}"

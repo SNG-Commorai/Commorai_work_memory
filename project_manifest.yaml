@@ -1,0 +1,10 @@
+project_name: Commorai_work_memory
+display_name: Commorai Work Memory
+version: 0.1.0
+project_type: local_first_memory_system
+license: MIT
+privacy_mode: local_private_by_default
+repository_visibility: public_framework_only
+created_at: 2026-04-23T00:42:05+08:00
+updated_at: 2026-04-23T00:42:05+08:00
+maintainer: Commorai

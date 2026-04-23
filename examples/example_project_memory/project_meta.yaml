@@ -1,0 +1,12 @@
+project_id: P_20260423_example-project
+project_name: Example_Project
+project_slug: example-project
+created_at: 2026-04-23T00:00:00+08:00
+updated_at: 2026-04-23T00:00:00+08:00
+status: active
+stage: research
+tags:
+  - example
+  - sanitized
+privacy_level: public_example
+summary: Sanitized example project metadata for the open-source framework.
