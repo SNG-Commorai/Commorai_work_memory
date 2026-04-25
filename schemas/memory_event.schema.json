@@ -2,16 +2,34 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "required": [
-    "event_id",
+    "memory_id",
     "created_at",
+    "updated_at",
     "memory_type",
-    "content"
+    "title",
+    "summary",
+    "content",
+    "tags",
+    "importance",
+    "confidence",
+    "source",
+    "privacy_level",
+    "status",
+    "update_mode",
+    "target_path",
+    "links",
+    "content_hash"
   ],
   "properties": {
-    "event_id": {
-      "type": "string"
+    "memory_id": {
+      "type": "string",
+      "minLength": 1
     },
     "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
       "type": "string",
       "format": "date-time"
     },
@@ -23,14 +41,52 @@
         "short_term_memory"
       ]
     },
-    "project_name": {
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "content": {
       "type": "string"
+    },
+    "project_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "project_id": {
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "field": {
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "module": {
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "subtype": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "field_or_module": {
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "tags": {
       "type": "array",
@@ -48,11 +104,9 @@
       "minimum": 1,
       "maximum": 5
     },
-    "content": {
-      "type": "string"
-    },
     "source": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1
     },
     "privacy_level": {
       "type": "string",
@@ -61,6 +115,57 @@
         "local_private",
         "sensitive"
       ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "pending_review",
+        "duplicate_skipped",
+        "conflict_recorded",
+        "archived"
+      ]
+    },
+    "update_mode": {
+      "type": "string",
+      "enum": [
+        "append",
+        "conflict_only",
+        "migrate",
+        "noop"
+      ]
+    },
+    "target_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "session_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "turn_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_event_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
     }
   },
   "additionalProperties": true

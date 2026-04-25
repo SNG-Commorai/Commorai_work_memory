@@ -23,7 +23,23 @@ REQUIRED_DIRS = [
     "00_System/rules",
     "01_Base_Memory",
     "02_Project_Memory",
+    "02_Project_Memory/_Project_Template",
+    "02_Project_Memory/_Project_Template/research",
+    "02_Project_Memory/_Project_Template/research/notes",
+    "02_Project_Memory/_Project_Template/analysis",
+    "02_Project_Memory/_Project_Template/analysis/outputs",
+    "02_Project_Memory/_Project_Template/tools",
+    "02_Project_Memory/_Project_Template/tools/specs",
+    "02_Project_Memory/_Project_Template/data",
+    "02_Project_Memory/_Project_Template/references",
+    "02_Project_Memory/_Project_Template/deliverables",
+    "02_Project_Memory/_Project_Template/archive",
     "03_Short_Term_Memory",
+    "03_Short_Term_Memory/sparks",
+    "03_Short_Term_Memory/temp_research",
+    "03_Short_Term_Memory/temp_analysis",
+    "03_Short_Term_Memory/tasks",
+    "03_Short_Term_Memory/to_review",
     "04_Context_Builder",
     "04_Context_Builder/generated_contexts",
     "99_Archive",
@@ -88,6 +104,26 @@ REQUIRED_FILES = [
     "04_Context_Builder/.gitkeep",
     "04_Context_Builder/generated_contexts/.gitkeep",
     "99_Archive/.gitkeep",
+    "01_Base_Memory/work_scope.md",
+    "01_Base_Memory/work_style.md",
+    "01_Base_Memory/preferences.md",
+    "01_Base_Memory/analysis_methods.md",
+    "01_Base_Memory/reusable_principles.md",
+    "01_Base_Memory/glossary.md",
+    "01_Base_Memory/long_term_planning.md",
+    "01_Base_Memory/conflicts.md",
+    "01_Base_Memory/base_index.md",
+    "02_Project_Memory/project_index.md",
+    "02_Project_Memory/_Project_Template/project_meta.yaml",
+    "02_Project_Memory/_Project_Template/project_brief.md",
+    "02_Project_Memory/_Project_Template/memory_log.md",
+    "02_Project_Memory/_Project_Template/decisions.md",
+    "02_Project_Memory/_Project_Template/open_questions.md",
+    "02_Project_Memory/_Project_Template/research/research_index.md",
+    "02_Project_Memory/_Project_Template/analysis/analysis_index.md",
+    "02_Project_Memory/_Project_Template/tools/tools_index.md",
+    "03_Short_Term_Memory/inbox.md",
+    "03_Short_Term_Memory/short_index.md",
 ]
 
 
@@ -95,6 +131,66 @@ def placeholder_for(relative_path: str) -> str:
     path = Path(relative_path)
     name = path.name
 
+    if relative_path.startswith("01_Base_Memory/") and name.endswith(".md") and name not in {"README.md", "base_index.md"}:
+        title = path.stem.replace("_", " ").title()
+        placeholder = "No pending items." if name == "conflicts.md" else "No formal entries yet."
+        return (
+            f"# {title}\n\n"
+            "## Entries\n"
+            "<!-- MEMORY_CONTENT_START -->\n"
+            f"{placeholder}\n"
+            "<!-- MEMORY_CONTENT_END -->\n"
+        )
+    if relative_path == "01_Base_Memory/base_index.md":
+        return "# Base Memory Index\n"
+    if relative_path == "02_Project_Memory/project_index.md":
+        return "# Project Index\n"
+    if relative_path == "03_Short_Term_Memory/inbox.md":
+        return (
+            "# Short-Term Inbox\n\n"
+            "## Entries\n"
+            "<!-- MEMORY_CONTENT_START -->\n"
+            "No records yet.\n"
+            "<!-- MEMORY_CONTENT_END -->\n"
+        )
+    if relative_path == "03_Short_Term_Memory/short_index.md":
+        return "# Short-Term Memory Index\n"
+    if relative_path == "02_Project_Memory/_Project_Template/project_meta.yaml":
+        return (
+            "project_id: P_YYYYMMDD_project-slug\n"
+            'project_name: "{{project_name}}"\n'
+            "project_slug: project-slug\n"
+            'project_stage: "{{project_stage}}"\n'
+            "status: active\n"
+            'created_at: "{{created_at}}"\n'
+            'updated_at: "{{updated_at}}"\n'
+        )
+    if relative_path in {
+        "02_Project_Memory/_Project_Template/project_brief.md",
+        "02_Project_Memory/_Project_Template/memory_log.md",
+        "02_Project_Memory/_Project_Template/decisions.md",
+        "02_Project_Memory/_Project_Template/open_questions.md",
+    }:
+        title_map = {
+            "project_brief.md": ("Project Brief", "No formal entries yet."),
+            "memory_log.md": ("Project Memory Log", "No records yet."),
+            "decisions.md": ("Project Decisions", "No formal entries yet."),
+            "open_questions.md": ("Open Questions", "No pending items."),
+        }
+        title, placeholder = title_map[name]
+        return (
+            f"# {title}\n\n"
+            "## Entries\n"
+            "<!-- MEMORY_CONTENT_START -->\n"
+            f"{placeholder}\n"
+            "<!-- MEMORY_CONTENT_END -->\n"
+        )
+    if relative_path.endswith("research/research_index.md"):
+        return "# Research Index\n"
+    if relative_path.endswith("analysis/analysis_index.md"):
+        return "# Analysis Index\n"
+    if relative_path.endswith("tools/tools_index.md"):
+        return "# Tools Index\n"
     if name == ".gitkeep":
         return ""
     if path.suffix == ".json":
